@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamodi Janendra | Portfolio</title>
+    <!-- Bootstrap 5 for layout structure -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for a premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --luxury-gold: #D4AF37;
+            --soft-beige: #f5f5dc;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, #1a1a1a, #0a0a0a);
+            color: var(--soft-beige);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container-profile {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 5px;
+            background: var(--bg-dark);
+            border: 2.5px solid var(--luxury-gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            transition: var(--transition);
+        }
+        
+        .profile-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Profile image optimized for your landscape shot */
+        .profile-img {
+            width: 160px; 
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover; 
+            /* Focuses on the subject within the wide frame */
+            object-position: 72% 60%; 
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Cormorant+Garamond', serif;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-weight: 300;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            letter-spacing: 1.5px;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-card {
+            background: var(--card-glass);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--soft-beige);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            border-radius: 2px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            background: var(--luxury-gold);
+            color: #000;
+            border-color: var(--luxury-gold);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.7);
+        }
+
+        /* Instagram-style Zoom Modal */
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            animation: zoomEffect 0.3s ease-out;
+        }
+
+        @keyframes zoomEffect {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .footer-tag {
+            margin-top: 50px;
+            font-size: 0.65rem;
+            opacity: 0.3;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-profile">
+    <!-- Click to trigger Instagram-style pop-out -->
+    <div class="profile-wrapper" onclick="openModal()">
+        <img src="WhatsApp Image 2026-05-03 at 10.54.43 AM.jpeg" 
+             alt="Chamodi Janendra" 
+             class="profile-img">
+    </div>
+
+    <h1>Chamodi Janendra</h1>
+    <p class="subtitle">Software Engineer • Creative Tech • Digital Artisan</p>
+
+    <div class="links-grid">
+        <a href="https://www.linkedin.com/in/chamodi-rajapaksha-75a925333" target="_blank" class="link-card">LinkedIn</a>
+        <a href="https://github.com/chamodi002" target="_blank" class="link-card">GitHub Portfolio</a>
+        <a href="https://www.instagram.com/__cham_0_2_?igsh=MWtpMWhzYjJndGZseg%3D%3D" target="_blank" class="link-card">Instagram</a>
+        <a href="https://www.tiktok.com/@chamodi_janendra_" target="_blank" class="link-card">TikTok</a>
+        <a href="https://www.facebook.com/share/1J2YHsoEQe/" target="_blank" class="link-card">Facebook</a>
+    </div>
+
+    <div class="footer-tag">
+        DESIGNED BY INVITEAURA STUDIOS
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="imageModal" onclick="closeModal()">
+    <img class="modal-content" src="WhatsApp Image 2026-05-03 at 10.54.43 AM.jpeg">
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById("imageModal").style.display = "flex";
+        document.body.style.overflow = "hidden"; // Prevent scrolling when open
+    }
+
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+    }
+
+    // Keyboard support: Close on Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+</script>
+
+</body>
+</html>
