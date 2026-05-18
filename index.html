@@ -7,7 +7,7 @@
     <!-- Bootstrap 5 for layout structure -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts for a premium look -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -56,13 +56,11 @@
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
         }
 
-        /* Profile image optimized for your landscape shot */
         .profile-img {
             width: 160px; 
             height: 160px;
             border-radius: 50%;
             object-fit: cover; 
-            /* Focuses on the subject within the wide frame */
             object-position: 72% 60%; 
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
@@ -70,7 +68,7 @@
         }
 
         h1 {
-            font-family: 'Cormorant+Garamond', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             letter-spacing: 3px;
             color: var(--luxury-gold);
@@ -87,12 +85,24 @@
             text-transform: uppercase;
         }
 
+        /* View Animation Mechanics */
+        .view-section {
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .view-section.hidden {
+            display: none;
+            opacity: 0;
+        }
+
         .links-grid {
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
 
+        /* Cascade Sequential Animation Configuration */
         .link-card {
             background: var(--card-glass);
             border: 1px solid rgba(212, 175, 55, 0.2);
@@ -109,6 +119,32 @@
             font-size: 0.75rem;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            
+            /* Hidden initially until the parent section becomes active */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Trigger cascade animations when parent view is active */
+        .view-section:not(.hidden) .link-card {
+            animation: cascadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Micro-delays for Item Sequence Reveals */
+        .view-section:not(.hidden) .link-card:nth-child(1) { animation-delay: 0.05s; }
+        .view-section:not(.hidden) .link-card:nth-child(2) { animation-delay: 0.12s; }
+        .view-section:not(.hidden) .link-card:nth-child(3) { animation-delay: 0.19s; }
+        .view-section:not(.hidden) .link-card:nth-child(4) { animation-delay: 0.26s; }
+        .view-section:not(.hidden) .link-card:nth-child(5) { animation-delay: 0.33s; }
+        .view-section:not(.hidden) .link-card:nth-child(6) { animation-delay: 0.40s; }
+        .view-section:not(.hidden) .link-card:nth-child(7) { animation-delay: 0.47s; }
+
+        @keyframes cascadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .link-card:hover {
@@ -117,6 +153,87 @@
             border-color: var(--luxury-gold);
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(0,0,0,0.7);
+        }
+
+        /* Distinct Design for the Primary Projects Trigger */
+        .projects-trigger-btn {
+            border: 1px solid var(--luxury-gold);
+            background: rgba(212, 175, 55, 0.08);
+            font-weight: 500;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Project Subpage List Interface */
+        .project-item-card {
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            padding: 20px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .project-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--luxury-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            transition: var(--transition);
+        }
+
+        .project-desc {
+            font-size: 0.8rem;
+            font-weight: 300;
+            opacity: 0.75;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            color: var(--soft-beige);
+            transition: var(--transition);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--luxury-gold);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .project-item-card:hover .project-title,
+        .project-item-card:hover .project-desc {
+            color: #000;
+            opacity: 1;
+        }
+
+        .project-item-card:hover .tag {
+            background: rgba(0, 0, 0, 0.15);
+            border-color: #000;
+            color: #000;
+        }
+
+        .back-nav-btn {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            opacity: 0.6;
+        }
+        
+        .back-nav-btn:hover {
+            opacity: 1;
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
 
         /* Instagram-style Zoom Modal */
@@ -163,7 +280,7 @@
 <body>
 
 <div class="container-profile">
-    <!-- Click to trigger Instagram-style pop-out -->
+    <!-- Profile Photo Avatar Frame -->
     <div class="profile-wrapper" onclick="openModal()">
         <img src="WhatsApp Image 2026-05-03 at 10.54.43 AM.jpeg" 
              alt="Chamodi Janendra" 
@@ -173,12 +290,64 @@
     <h1>Chamodi Janendra</h1>
     <p class="subtitle">Software Engineer • Creative Tech • Digital Artisan</p>
 
-    <div class="links-grid">
+    <!-- VIEW 1: HOME PANEL (Main Socials Grid) -->
+    <div id="socialLinksPanel" class="view-section links-grid">
+        <!-- The Single Project Access Button -->
+        <div onclick="togglePanel('projectsPanel')" class="link-card projects-trigger-btn">My Projects</div>
+        
         <a href="https://www.linkedin.com/in/chamodi-rajapaksha-75a925333" target="_blank" class="link-card">LinkedIn</a>
         <a href="https://github.com/chamodi002" target="_blank" class="link-card">GitHub Portfolio</a>
         <a href="https://www.instagram.com/__cham_0_2_?igsh=MWtpMWhzYjJndGZseg%3D%3D" target="_blank" class="link-card">Instagram</a>
         <a href="https://www.tiktok.com/@chamodi_janendra_" target="_blank" class="link-card">TikTok</a>
         <a href="https://www.facebook.com/share/1J2YHsoEQe/" target="_blank" class="link-card">Facebook</a>
+    </div>
+
+    <!-- VIEW 2: PROJECTS PANEL (Hidden initially, opens smoothly) -->
+    <div id="projectsPanel" class="view-section links-grid hidden">
+        <!-- Back Navigation Control -->
+        <div onclick="togglePanel('socialLinksPanel')" class="link-card back-nav-btn">← Back to Main Menu</div>
+        
+        <!-- Link 1: InviteAura -->
+        <a href="https://chamodi002.github.io/InviteAura/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">InviteAura</div>
+            <div class="project-desc">Premium signature platform crafting high-end, interactive digital invitations with luxury branding.</div>
+            <div class="project-tags"><span class="tag">React</span><span class="tag">Tailwind</span></div>
+        </a>
+
+        <!-- Link 2: LuxeAura Salon Web -->
+        <a href="https://chamodi002.github.io/luxeaura-salon-web/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">LuxeAura Salon Web</div>
+            <div class="project-desc">A highly bespoke, aesthetic interface tailored for high-end boutique beauty and luxury salon presentation.</div>
+            <div class="project-tags"><span class="tag">HTML5</span><span class="tag">Luxury Brand</span></div>
+        </a>
+
+        <!-- Link 3: Signature Premiere Reveal -->
+        <a href="https://chamodi002.github.io/signature-premiere-reveal/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">Signature Reveal</div>
+            <div class="project-desc">Cinematic, interaction-driven web landing page engineered for premium reveals and elite event launches.</div>
+            <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">UX Reveal</span></div>
+        </a>
+
+        <!-- Link 4: Wedding Invitation -->
+        <a href="https://chamodi002.github.io/Wedding_invitation/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">Wedding Invitation</div>
+            <div class="project-desc">Elegant digital invitation experience displaying timeless aesthetic details and interactive guest timelines.</div>
+            <div class="project-tags"><span class="tag">Typography</span><span class="tag">Interactive</span></div>
+        </a>
+
+        <!-- Link 5: HBD Surprise -->
+        <a href="https://chamodi002.github.io/hbd-surprise/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">HBD Surprise Portal</div>
+            <div class="project-desc">A tailored micro-experience with animations and dynamic elements designed for celebratory digital gifts.</div>
+            <div class="project-tags"><span class="tag">Creative Tech</span><span class="tag">Frontend</span></div>
+        </a>
+
+        <!-- Link 6: Happy New Year -->
+        <a href="https://chamodi002.github.io/happy-new-year/" target="_blank" class="link-card project-item-card">
+            <div class="project-title">Happy New Year Festive App</div>
+            <div class="project-desc">A visually expressive and highly stylized responsive interface commemorating seasonal celebrations.</div>
+            <div class="project-tags"><span class="tag">CSS FX</span><span class="tag">Event UI</span></div>
+        </a>
     </div>
 
     <div class="footer-tag">
@@ -192,17 +361,42 @@
 </div>
 
 <script>
+    // Unified Fluid Panel Switcher with Dynamic Cascade Resets
+    function togglePanel(targetPanelId) {
+        const isOpeningProjects = targetPanelId === 'projectsPanel';
+        const activePanel = isOpeningProjects ? document.getElementById("socialLinksPanel") : document.getElementById("projectsPanel");
+        const nextPanel = document.getElementById(targetPanelId);
+        
+        activePanel.style.opacity = "0";
+        setTimeout(() => {
+            activePanel.classList.add("hidden");
+            
+            // Momentarily clear child elements opacity state to re-trigger the cascade CSS animation
+            const targets = nextPanel.querySelectorAll('.link-card');
+            targets.forEach(t => t.style.animation = 'none');
+            
+            nextPanel.classList.remove("hidden");
+            
+            // Force browser reflow to register the cleared animation state
+            void nextPanel.offsetWidth; 
+            
+            // Re-apply clean CSS layout styles
+            targets.forEach(t => t.style.animation = '');
+            setTimeout(() => { nextPanel.style.opacity = "1"; }, 30);
+        }, 300);
+    }
+
+    // Modal Image Handlers
     function openModal() {
         document.getElementById("imageModal").style.display = "flex";
-        document.body.style.overflow = "hidden"; // Prevent scrolling when open
+        document.body.style.overflow = "hidden";
     }
 
     function closeModal() {
         document.getElementById("imageModal").style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
+        document.body.style.overflow = "auto";
     }
 
-    // Keyboard support: Close on Escape key
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape") {
             closeModal();
